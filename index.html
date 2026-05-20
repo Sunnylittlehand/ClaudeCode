@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Sessions Intelligence</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --sidebar-bg: #ffffff;
+    --main-bg: #ffffff;
+    --text: #1d1d1f;
+    --text-muted: #6e6e73;
+    --accent: #0066cc;
+    --border: #d2d2d7;
+    --sidebar-w: 220px;
+    --hover: #f0f0f5;
+    --active-bg: #e8f0fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --sidebar-bg: #161b22;
+      --main-bg: #0d1117;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --border: #30363d;
+      --hover: #1c2128;
+      --active-bg: #1c2d45;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+
+  .layout { display: flex; height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-header {
+    padding: 20px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-header h1 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .sidebar-header p {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .report-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+  .report-item {
+    display: block;
+    padding: 9px 16px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13.5px;
+    transition: background 0.1s;
+  }
+  .report-item:hover { background: var(--hover); }
+  .report-item.active {
+    background: var(--active-bg);
+    border-left-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .report-item .date-label { display: block; }
+  .report-item .date-sub { display: block; font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+  /* Main */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--main-bg);
+  }
+  .main-inner {
+    max-width: 780px;
+    padding: 40px 48px;
+    margin: 0 auto;
+  }
+
+  /* Empty / loading states */
+  .state-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    font-size: 14px;
+    gap: 8px;
+    min-height: 300px;
+  }
+  .state-msg .icon { font-size: 32px; opacity: 0.3; }
+
+  /* Markdown styles */
+  .main-inner h1 { font-size: 1.7em; font-weight: 700; line-height: 1.2; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+  .main-inner h2 { font-size: 1.2em; font-weight: 600; margin: 40px 0 12px; color: var(--text); }
+  .main-inner h3 { font-size: 1em; font-weight: 600; margin: 20px 0 6px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-size: 11px; }
+  .main-inner p { line-height: 1.7; margin-bottom: 14px; font-size: 15px; }
+  .main-inner a { color: var(--accent); text-decoration: none; }
+  .main-inner a:hover { text-decoration: underline; }
+  .main-inner strong { font-weight: 600; }
+  .main-inner ul, .main-inner ol { padding-left: 20px; margin-bottom: 14px; }
+  .main-inner li { line-height: 1.7; font-size: 15px; margin-bottom: 4px; }
+  .main-inner code { background: var(--hover); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; font-family: 'SF Mono', 'Fira Code', monospace; }
+  .main-inner pre { background: var(--hover); padding: 16px; border-radius: 8px; overflow-x: auto; margin-bottom: 16px; }
+  .main-inner pre code { background: none; padding: 0; }
+  .main-inner hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .main-inner blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: var(--text-muted); margin: 16px 0; }
+  .main-inner table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px; }
+  .main-inner th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--border); font-weight: 600; }
+  .main-inner td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+
+  /* Token modal */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+  }
+  .modal {
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    max-width: 420px;
+    width: 90%;
+  }
+  .modal h2 { font-size: 1.1em; margin-bottom: 10px; }
+  .modal p { font-size: 13.5px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; }
+  .modal input {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text);
+    font-size: 13.5px; margin-bottom: 10px;
+    outline: none;
+  }
+  .modal input:focus { border-color: var(--accent); }
+  .modal button {
+    width: 100%; padding: 11px;
+    background: var(--accent); color: white;
+    border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+  }
+  .modal button:hover { opacity: 0.9; }
+  .modal .help-link { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: var(--text-muted); }
+  .modal .help-link a { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .sidebar { width: 180px; min-width: 180px; }
+    .main-inner { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h1>Intelligence</h1>
+      <p>Anthropic Sessions</p>
+    </div>
+    <div class="report-list" id="report-list">
+      <div class="state-msg"><span>Loading…</span></div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div id="main-content">
+      <div class="state-msg">
+        <span class="icon">◆</span>
+        <span>Select a report</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const OWNER = 'Sunnylittlehand';
+const REPO  = 'ClaudeCode';
+const PATH  = 'anthropic-research';
+const TOKEN_STORE = 'asi_gh_token';
+
+let token = localStorage.getItem(TOKEN_STORE) || '';
+let reports = [];
+
+function authHeaders() {
+  const h = { Accept: 'application/vnd.github.v3+json' };
+  if (token) h.Authorization = `token ${token}`;
+  return h;
+}
+
+function formatDate(filename) {
+  const m = filename.match(/sessions-(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return filename;
+  const d = new Date(`${m[1]}-${m[2]}-${m[3]}T12:00:00Z`);
+  return {
+    primary: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+    sub: d.toLocaleDateString('en-GB', { weekday: 'long' })
+  };
+}
+
+async function loadReports() {
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+  let res;
+  try { res = await fetch(url, { headers: authHeaders() }); }
+  catch { showError('Network error — check your connection.'); return; }
+
+  if (res.status === 401 || res.status === 403) { showTokenModal(); return; }
+  if (res.status === 404) { showError('Folder not found. Have any reports been committed yet?'); return; }
+
+  const files = await res.json();
+  reports = files
+    .filter(f => f.type === 'file' && f.name.startsWith('sessions-') && f.name.endsWith('.md'))
+    .sort((a, b) => b.name.localeCompare(a.name));
+
+  renderSidebar();
+  if (reports.length > 0) loadReport(0);
+}
+
+function renderSidebar() {
+  const list = document.getElementById('report-list');
+  if (reports.length === 0) {
+    list.innerHTML = '<div class="state-msg"><span>No reports yet</span></div>';
+    return;
+  }
+  list.innerHTML = reports.map((f, i) => {
+    const d = formatDate(f.name);
+    return `<a class="report-item" data-index="${i}" href="#">
+      <span class="date-label">${d.primary}</span>
+      <span class="date-sub">${d.sub}</span>
+    </a>`;
+  }).join('');
+  list.querySelectorAll('.report-item').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); loadReport(+el.dataset.index); });
+  });
+}
+
+async function loadReport(index) {
+  document.querySelectorAll('.report-item').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.getElementById('main-content').innerHTML =
+    '<div class="state-msg"><span>Loading…</span></div>';
+
+  const file = reports[index];
+  let text;
+  try {
+    const res = await fetch(file.download_url, { headers: authHeaders() });
+    text = await res.text();
+  } catch { showError('Could not load this report.'); return; }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'main-inner';
+  wrapper.innerHTML = marked.parse(text);
+  document.getElementById('main-content').innerHTML = '';
+  document.getElementById('main-content').appendChild(wrapper);
+  document.querySelector('.main').scrollTo(0, 0);
+}
+
+function showError(msg) {
+  document.getElementById('main-content').innerHTML =
+    `<div class="state-msg"><span class="icon">⚠</span><span>${msg}</span></div>`;
+}
+
+function showTokenModal() {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal">
+      <h2>Access token needed</h2>
+      <p>This report viewer reads from a private GitHub repository. Enter a Personal Access Token with <strong>Contents: read</strong> permission. It's saved in your browser only.</p>
+      <input id="tok-input" type="password" placeholder="ghp_…" autocomplete="off" />
+      <button id="tok-btn">Open reports →</button>
+      <span class="help-link">
+        <a href="https://github.com/settings/tokens/new?description=Anthropic+Reader&scopes=repo" target="_blank">Create a token on GitHub ↗</a>
+      </span>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('tok-input').focus();
+  document.getElementById('tok-btn').addEventListener('click', () => {
+    token = document.getElementById('tok-input').value.trim();
+    if (!token) return;
+    localStorage.setItem(TOKEN_STORE, token);
+    overlay.remove();
+    loadReports();
+  });
+  document.getElementById('tok-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('tok-btn').click();
+  });
+}
+
+marked.setOptions({ breaks: true, gfm: true });
+loadReports();
+</script>
+</body>
+</html>
