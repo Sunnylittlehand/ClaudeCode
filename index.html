@@ -112,8 +112,8 @@
 
   /* Markdown styles */
   .main-inner h1 { font-size: 1.7em; font-weight: 700; line-height: 1.2; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
-  .main-inner h2 { font-size: 1.2em; font-weight: 600; margin: 40px 0 12px; color: var(--text); }
-  .main-inner h3 { font-size: 1em; font-weight: 600; margin: 20px 0 6px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-size: 11px; }
+  .main-inner h2 { font-size: 1.2em; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+  .main-inner h3 { font-weight: 600; margin: 20px 0 6px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-size: 11px; }
   .main-inner p { line-height: 1.7; margin-bottom: 14px; font-size: 15px; }
   .main-inner a { color: var(--accent); text-decoration: none; }
   .main-inner a:hover { text-decoration: underline; }
@@ -128,6 +128,31 @@
   .main-inner table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px; }
   .main-inner th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--border); font-weight: 600; }
   .main-inner td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+
+  /* Star group dividers */
+  .star-divider { margin: 48px 0 4px; }
+  .star-divider.first-divider { margin-top: 8px; }
+  .star-divider-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0 10px;
+    border-top: 2px solid var(--border);
+  }
+  .star-divider .star-icons { font-size: 15px; }
+  .star-divider .star-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .star-divider .star-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
 
   /* Token modal */
   .modal-overlay {
@@ -165,7 +190,6 @@
   .modal .help-link { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: var(--text-muted); }
   .modal .help-link a { color: var(--accent); }
 
-  /* Responsive */
   @media (max-width: 640px) {
     .sidebar { width: 180px; min-width: 180px; }
     .main-inner { padding: 24px 20px; }
@@ -201,6 +225,14 @@ const REPO  = 'ClaudeCode';
 const PATH  = 'anthropic-research';
 const TOKEN_STORE = 'asi_gh_token';
 
+const STAR_LABELS = {
+  5: 'Most Significant',
+  4: 'High Significance',
+  3: 'Notable',
+  2: 'Incremental',
+  1: 'Minor'
+};
+
 let token = localStorage.getItem(TOKEN_STORE) || '';
 let reports = [];
 
@@ -218,6 +250,55 @@ function formatDate(filename) {
     primary: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
     sub: d.toLocaleDateString('en-GB', { weekday: 'long' })
   };
+}
+
+function countStarsInText(text) {
+  const filled = (text.match(/⭐/g) || []).length;
+  return (filled >= 1 && filled <= 5) ? filled : null;
+}
+
+function groupByStars(container) {
+  const h2s = Array.from(container.querySelectorAll('h2'));
+  if (h2s.length < 2) return;
+
+  // First pass: count sessions per star level
+  const starCounts = {};
+  h2s.forEach(h2 => {
+    if (!h2.querySelector('a')) return;
+    let el = h2.nextElementSibling;
+    for (let i = 0; i < 14 && el; i++) {
+      const count = countStarsInText(el.textContent);
+      if (count !== null) { starCounts[count] = (starCounts[count] || 0) + 1; break; }
+      el = el.nextElementSibling;
+    }
+  });
+
+  // Second pass: insert dividers at each star-level boundary
+  let currentStars = null;
+  let isFirst = true;
+  h2s.forEach(h2 => {
+    if (!h2.querySelector('a')) return;
+    let el = h2.nextElementSibling;
+    let starCount = null;
+    for (let i = 0; i < 14 && el; i++) {
+      const count = countStarsInText(el.textContent);
+      if (count !== null) { starCount = count; break; }
+      el = el.nextElementSibling;
+    }
+    if (starCount === null || starCount === currentStars) return;
+    currentStars = starCount;
+
+    const n = starCounts[starCount] || 0;
+    const divider = document.createElement('div');
+    divider.className = 'star-divider' + (isFirst ? ' first-divider' : '');
+    divider.innerHTML = `<div class="star-divider-inner">
+      <span class="star-icons">${'⭐'.repeat(starCount)}</span>
+      <span class="star-label">${STAR_LABELS[starCount] || ''}</span>
+      <span class="star-count">${n} session${n !== 1 ? 's' : ''}</span>
+    </div>`;
+    h2.parentNode.insertBefore(divider, h2);
+    isFirst = false;
+  });
 }
 
 async function loadReports() {
@@ -273,6 +354,7 @@ async function loadReport(index) {
   const wrapper = document.createElement('div');
   wrapper.className = 'main-inner';
   wrapper.innerHTML = marked.parse(text);
+  groupByStars(wrapper);
   document.getElementById('main-content').innerHTML = '';
   document.getElementById('main-content').appendChild(wrapper);
   document.querySelector('.main').scrollTo(0, 0);
