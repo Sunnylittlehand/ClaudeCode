@@ -77,8 +77,12 @@ jobs:
 
       - name: Send via Resend
         env:
-          RESEND_API_KEY: re_3bBjXg4Y_BExZeSUDEwGnrE9J7y49eqki
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
+          if [ -z "$RESEND_API_KEY" ]; then
+            echo "RESEND_API_KEY secret is not set. Add it under repo Settings > Secrets and variables > Actions." >&2
+            exit 1
+          fi
           HTTP=$(curl -s -o /tmp/resp.json -w '%{http_code}' -X POST 'https://api.resend.com/emails' \
             -H "Authorization: Bearer $RESEND_API_KEY" \
             -H 'Content-Type: application/json' \
