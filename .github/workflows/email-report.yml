@@ -20,28 +20,16 @@ jobs:
       - name: Install markdown
         run: pip install markdown
 
-      - name: Determine report date
-        id: date
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Extract date from trigger file name
-            FILE=$(git diff-tree --no-commit-id -r --name-only ${{ github.sha }} | grep 'email-trigger-' | head -1)
-            DATE=$(echo "$FILE" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}')
-            echo "date=${DATE:-$(date +%Y-%m-%d)}" >> $GITHUB_OUTPUT
-          else
-            echo "date=${{ github.event.inputs.report_date }}" >> $GITHUB_OUTPUT
-          fi
-
       - name: Build and send email
         env:
           RESEND_API_KEY: re_3bBjXg4Y_BExZeSUDEwGnrE9J7y49eqki
-          REPORT_DATE: ${{ steps.date.outputs.date }}
+          REPORT_DATE: ${{ github.event.inputs.report_date || '2026-06-19' }}
         run: |
           python3 << 'PYEOF'
           import json, os, re, sys, urllib.request, urllib.error
           from datetime import date, timedelta
 
-          today = os.environ.get('REPORT_DATE', date.today().isoformat())
+          today = os.environ.get('REPORT_DATE') or date.today().isoformat()
           start = (date.fromisoformat(today) - timedelta(days=30)).isoformat()
           api_key = os.environ['RESEND_API_KEY']
 
