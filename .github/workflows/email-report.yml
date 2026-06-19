@@ -1,6 +1,9 @@
 name: Email AI Intelligence Report
 
 on:
+  push:
+    paths:
+      - 'anthropic-research/email-trigger-*.txt'
   workflow_dispatch:
     inputs:
       report_date:
@@ -17,13 +20,25 @@ jobs:
       - name: Install markdown
         run: pip install markdown
 
+      - name: Determine report date
+        id: date
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Extract date from trigger file name
+            FILE=$(git diff-tree --no-commit-id -r --name-only ${{ github.sha }} | grep 'email-trigger-' | head -1)
+            DATE=$(echo "$FILE" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}')
+            echo "date=${DATE:-$(date +%Y-%m-%d)}" >> $GITHUB_OUTPUT
+          else
+            echo "date=${{ github.event.inputs.report_date }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and send email
         env:
           RESEND_API_KEY: re_3bBjXg4Y_BExZeSUDEwGnrE9J7y49eqki
-          REPORT_DATE: ${{ github.event.inputs.report_date }}
+          REPORT_DATE: ${{ steps.date.outputs.date }}
         run: |
           python3 << 'PYEOF'
-          import json, os, re, subprocess, sys
+          import json, os, re, sys, urllib.request, urllib.error
           from datetime import date, timedelta
 
           today = os.environ.get('REPORT_DATE', date.today().isoformat())
@@ -72,7 +87,6 @@ jobs:
               'html': html,
           })
 
-          import urllib.request
           req = urllib.request.Request(
               'https://api.resend.com/emails',
               data=payload.encode(),
