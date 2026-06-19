@@ -1,0 +1,97 @@
+name: Email AI Intelligence Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      report_date:
+        description: 'Report date (YYYY-MM-DD)'
+        required: true
+        default: '2026-06-19'
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install markdown
+        run: pip install markdown
+
+      - name: Build and send email
+        env:
+          RESEND_API_KEY: re_3bBjXg4Y_BExZeSUDEwGnrE9J7y49eqki
+          REPORT_DATE: ${{ github.event.inputs.report_date }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, re, subprocess, sys
+          from datetime import date, timedelta
+
+          today = os.environ.get('REPORT_DATE', date.today().isoformat())
+          start = (date.fromisoformat(today) - timedelta(days=30)).isoformat()
+          api_key = os.environ['RESEND_API_KEY']
+
+          report_path = f"anthropic-research/sessions-{today}.md"
+          try:
+              with open(report_path, 'r') as f:
+                  body = f.read()
+          except FileNotFoundError:
+              body = ''
+
+          if not body.strip():
+              status = 'NOT STARTED'; items = 0
+              report_html = '<p>No report file was generated for today yet.</p>'
+          else:
+              m = re.search(r'Status\**:?\**\s*(COMPLETE|IN PROGRESS)', body, re.I)
+              status = m.group(1).upper() if m else 'IN PROGRESS'
+              items = len(re.findall(r'^##\s+\[', body, re.M))
+              try:
+                  import markdown
+                  report_html = markdown.markdown(body, extensions=['extra','sane_lists','nl2br'])
+              except Exception:
+                  import html as _h
+                  esc = _h.escape(body)
+                  esc = re.sub(r'\[(.+?)\]\((https?://[^\s)]+)\)', r'<a href="\2">\1</a>', esc)
+                  report_html = '<pre style="white-space:pre-wrap;font-family:inherit">' + esc + '</pre>'
+
+          gh = f"https://github.com/Sunnylittlehand/ClaudeCode/blob/main/anthropic-research/sessions-{today}.md"
+          html = (
+              '<div style="font-family:-apple-system,Segoe UI,sans-serif;max-width:720px;margin:0 auto;color:#1d1d1f">'
+              '<div style="background:#f5f5f7;border-radius:12px;padding:16px 20px;margin-bottom:24px">'
+              f'<h2 style="margin:0 0 6px">AI Intelligence Report &mdash; {status}</h2>'
+              f'<p style="margin:0;color:#6e6e73;font-size:14px">{start} to {today} &nbsp;|&nbsp; {items} items &nbsp;|&nbsp; Anthropic &middot; OpenAI &middot; Codex &middot; Karpathy</p>'
+              '</div>'
+              f'<div style="line-height:1.55">{report_html}</div>'
+              f'<p style="margin-top:28px;padding-top:16px;border-top:1px solid #e5e5e5;font-size:13px;color:#6e6e73">Full version on <a href="{gh}">GitHub</a>.</p>'
+              '</div>'
+          )
+
+          payload = json.dumps({
+              'from': 'AI Research Agent <onboarding@resend.dev>',
+              'to': ['sunny.shan.sun@gmail.com'],
+              'subject': f'[AI Intelligence] {status} — {today} ({items} items)',
+              'html': html,
+          })
+
+          import urllib.request
+          req = urllib.request.Request(
+              'https://api.resend.com/emails',
+              data=payload.encode(),
+              headers={
+                  'Authorization': f'Bearer {api_key}',
+                  'Content-Type': 'application/json',
+              },
+              method='POST'
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  body_resp = resp.read().decode()
+                  print(f'Resend HTTP {resp.status}')
+                  print(body_resp)
+                  if resp.status != 200:
+                      sys.exit(1)
+          except urllib.error.HTTPError as e:
+              body_resp = e.read().decode()
+              print(f'Resend HTTP {e.code}')
+              print(body_resp)
+              sys.exit(1)
+          PYEOF
