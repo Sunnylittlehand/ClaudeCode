@@ -17,6 +17,8 @@ never fork across days.
 > Updated 2026-06-24 with six new items: Claude Compliance API (28 integrations), How We Contain Claude
 > engineering post, Claude Code Week 23 (auto mode on cloud providers), Claude Code Week 24 (nested
 > sub-agents + security hardening), ChatGPT Dreaming V3, and Claude service outage June 23.
+> Updated 2026-06-25 with three new items: Claude Tag on Slack (async enterprise agent), OpenAI Daybreak
+> expansion (GPT-5.5-Cyber + Codex Security + Patch the Planet), Samsung Electronics + ChatGPT/Codex.
 
 | Canonical Title | Canonical URL | Source | Category | Date | Stars | Fully covered in | Last seen | Status / notes |
 |---|---|---|---|---|---|---|---|---|
@@ -65,3 +67,6 @@ never fork across days.
 | Claude Code Week 24: Sub-agents Spawn Sub-agents and Cross-Session Messaging Hardening | https://code.claude.com/docs/en/whats-new/2026-w24 | Anthropic | A/F | 2026-06-08 | ⭐⭐⭐ | sessions-2026-06-24.md | 2026-06-24 | New full entry 06-24; 5-level nested sub-agent trees; cross-session SendMessage no longer carries user authority; enforceAvailableModels; disableBundledSkills; --safe-mode; fallbackModel chain |
 | OpenAI ChatGPT Dreaming V3: Persistent Cross-Session Memory With GDPR Implications | https://openai.com/index/chatgpt-memory-dreaming/ | OpenAI | A/C | 2026-06-04 | ⭐⭐⭐ | sessions-2026-06-24.md | 2026-06-24 | New full entry 06-24; background synthesis of all past conversations → injected into system prompt; EU DPA: constitutes GDPR profiling; Tenable: prompt-injection cross-session exfiltration channel; rolled out to US Plus/Pro first |
 | Claude Service Outage — June 23, 2026 | https://www.techradar.com/news/live/claude-down-june-23-2026 | Anthropic | F | 2026-06-23 | ⭐⭐ | sessions-2026-06-24.md | 2026-06-24 | New entry 06-24; all surfaces down (claude.ai, API, Code, Cowork); 2.5 hours; resolved 12:44pm ET; no data loss |
+| Claude Tag: Anthropic Launches Slack-Native Async AI Agent for Enterprise Teams | https://www.anthropic.com/news/claude-tag | Anthropic | A/F | 2026-06-23 | ⭐⭐⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; research preview for Enterprise/Team; multiplayer Slack agent; 65% of Anthropic's own product code from internal version; legacy Claude in Slack retired Aug 3 |
+| OpenAI Expands Daybreak: GPT-5.5-Cyber, Codex Security Plugin, and Patch the Planet | https://openai.com/index/daybreak-securing-the-world/ | OpenAI | A/C | 2026-06-22 | ⭐⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; GPT-5.5-Cyber full release (85.6% CyberGym); Codex Security auto-patching; IBM/Tenable/Cato/Check Point partners; Patch the Planet open-source initiative |
+| Samsung Electronics Brings ChatGPT and Codex to Employees Globally | https://openai.com/index/samsung-openai-enterprise/ | OpenAI | B | 2026-06-21 | ⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; global Samsung Electronics deployment runs parallel to Samsung SDS Claude Code deal — multi-vendor enterprise AI confirmed |
