@@ -19,6 +19,9 @@ never fork across days.
 > sub-agents + security hardening), ChatGPT Dreaming V3, and Claude service outage June 23.
 > Updated 2026-06-25 with three new items: Claude Tag on Slack (async enterprise agent), OpenAI Daybreak
 > expansion (GPT-5.5-Cyber + Codex Security + Patch the Planet), Samsung Electronics + ChatGPT/Codex.
+> Updated 2026-06-26 with three new items: Anthropic accuses Alibaba of 28.8M-query distillation attack
+> on Claude; OpenAI/Broadcom unveil "Jalapeño" custom LLM inference chip; Google AI talent exodus —
+> Jonas Adler and Alexander Pritzel join Anthropic from Gemini.
 
 | Canonical Title | Canonical URL | Source | Category | Date | Stars | Fully covered in | Last seen | Status / notes |
 |---|---|---|---|---|---|---|---|---|
@@ -70,3 +73,6 @@ never fork across days.
 | Claude Tag: Anthropic Launches Slack-Native Async AI Agent for Enterprise Teams | https://www.anthropic.com/news/claude-tag | Anthropic | A/F | 2026-06-23 | ⭐⭐⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; research preview for Enterprise/Team; multiplayer Slack agent; 65% of Anthropic's own product code from internal version; legacy Claude in Slack retired Aug 3 |
 | OpenAI Expands Daybreak: GPT-5.5-Cyber, Codex Security Plugin, and Patch the Planet | https://openai.com/index/daybreak-securing-the-world/ | OpenAI | A/C | 2026-06-22 | ⭐⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; GPT-5.5-Cyber full release (85.6% CyberGym); Codex Security auto-patching; IBM/Tenable/Cato/Check Point partners; Patch the Planet open-source initiative |
 | Samsung Electronics Brings ChatGPT and Codex to Employees Globally | https://openai.com/index/samsung-openai-enterprise/ | OpenAI | B | 2026-06-21 | ⭐⭐⭐ | sessions-2026-06-25.md | 2026-06-25 | New full entry 06-25; global Samsung Electronics deployment runs parallel to Samsung SDS Claude Code deal — multi-vendor enterprise AI confirmed |
+| Anthropic Accuses Alibaba of Largest-Ever Distillation Attack on Claude | https://www.bloomberg.com/news/articles/2026-06-24/anthropic-accuses-alibaba-of-illicitly-accessing-its-ai-models | Bloomberg / Anthropic | B/C | 2026-06-24 | ⭐⭐⭐⭐⭐ | sessions-2026-06-26.md | 2026-06-26 | New full entry 06-26; 25K fraudulent accounts, 28.8M exchanges Apr 22–Jun 5; Alibaba/Qwen adversarial distillation targeting Claude's software-eng + agentic reasoning; letter to US senators + White House; direct trigger for Export Directive context |
+| OpenAI and Broadcom Unveil "Jalapeño" — First Custom LLM Inference Chip | https://openai.com/index/openai-broadcom-jalapeno-inference-chip/ | OpenAI | A | 2026-06-24 | ⭐⭐⭐⭐ | sessions-2026-06-26.md | 2026-06-26 | New full entry 06-26; reticle-sized ASIC, 9-month design-to-tape-out, better perf/watt vs SOTA; multi-generation compute roadmap with Broadcom; initial deployment end of 2026 |
+| Google AI Talent Exodus: Jonas Adler and Alexander Pritzel Join Anthropic From Gemini | https://www.bloomberg.com/news/articles/2026-06-24/google-poised-to-lose-two-more-high-profile-ai-staffers-to-anthropic | Bloomberg | B | 2026-06-24 | ⭐⭐⭐⭐ | sessions-2026-06-26.md | 2026-06-26 | New full entry 06-26; Adler (Gemini coding) → Anthropic AI coding; Pritzel (Gemini training) → Anthropic training; 4th/5th Google AI departures in 6 days; pre-IPO equity cited |
