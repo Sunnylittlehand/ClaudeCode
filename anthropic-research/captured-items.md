@@ -35,6 +35,9 @@ never fork across days.
 > in US nonprofits at $85K); Claude Code Trusted Devices (admin device verification for remote sessions, beta);
 > Mythos 5 extended to US critical infrastructure defenders (material update); Paving the Way for AI Agents in
 > Biology (VirBench research, gget virus tool lifts accuracy 17% → 99.7%).
+> Updated 2026-06-30 with two new items: Claude in Microsoft Foundry GA (Azure-native with Entra ID, RBAC, US data
+> zone, zero data retention, MACC drawdown, NVIDIA GB300 Blackwell Ultra); claude-mythos-preview retired today —
+> migrate to claude-mythos-5 (requires Project Glasswing / trusted-partner clearance).
 
 | Canonical Title | Canonical URL | Source | Category | Date | Stars | Fully covered in | Last seen | Status / notes |
 |---|---|---|---|---|---|---|---|---|
@@ -104,3 +107,5 @@ never fork across days.
 | Claude Corps: Anthropic Commits $150 Million to Train and Place 1,000 AI Fellows in US Nonprofits | https://www.anthropic.com/news/claude-corps | Anthropic | B/E | 2026-06-11 | ⭐⭐⭐⭐ | sessions-2026-06-29.md | 2026-06-29 | New full entry 06-29; $150M commitment; 1,000 fellows at $85K/year; CodePath employer of record; Social Finance evaluation; first cohort 100 fellows Oct 2026; applications close July 17 |
 | Claude Code Trusted Devices: Admin-Required Device Verification for Remote Control Sessions | https://code.claude.com/docs/en/remote-control | Anthropic | F | 2026-06-26 | ⭐⭐⭐ | sessions-2026-06-29.md | 2026-06-29 | New full entry 06-29; beta on Team/Enterprise; admin must enable; enrollment tied to full auth event; closes gap between signed-in and authorised-device for remote session access |
 | Paving the Way for AI Agents in Biology: Anthropic VirBench Research | https://www.anthropic.com/research/agents-in-biology | Anthropic Research | C | 2026-06-08 | ⭐⭐⭐ | sessions-2026-06-29.md | 2026-06-29 | New full entry 06-29; Laura Luebbert (Broad Institute/FutureHouse); VirBench shows Claude/GPT-5.5 at 17-91% accuracy on viral sequence retrieval; gget virus deterministic tool lifts to 99.7%; core lesson: agent reliability bottleneck is data infrastructure not model |
+| Claude in Microsoft Foundry Is Now Generally Available | https://claude.com/blog/claude-in-microsoft-foundry | Anthropic / Microsoft | F | 2026-06-29 | ⭐⭐⭐⭐ | sessions-2026-06-30.md | 2026-06-30 | New full entry 06-30; Claude Opus 4.8 + Haiku 4.5 on NVIDIA GB300 Blackwell Ultra; Entra ID auth, Azure RBAC, US data zone, zero data retention, MACC drawdown; single CCU invoice; removes separate Anthropic contract requirement for Azure Enterprise Agreement customers |
+| Claude Mythos Preview (`claude-mythos-preview`) Retired — Migrate to Claude Mythos 5 | https://platform.claude.com/docs/en/about-claude/model-deprecations | Anthropic | A | 2026-06-30 | ⭐⭐⭐ | sessions-2026-06-30.md | 2026-06-30 | New entry 06-30; retirement effective today; replacement is claude-mythos-5 (requires Project Glasswing / US trusted-partner clearance); closes out the Mythos Preview era |
