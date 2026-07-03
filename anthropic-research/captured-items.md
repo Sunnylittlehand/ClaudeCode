@@ -48,6 +48,10 @@ never fork across days.
 > classifier; Mythos 5 still US-vetted-org-only); OpenAI GeneBench-Pro (129-problem biology benchmark: GPT-5.6
 > Sol 28.7% vs Claude Opus 4.8 16.0%); Codex CLI v0.142.5 security patch (trace-log WebSocket payload exposure
 > fixed); ChatGPT Business centralised plugin management (early July, soft date).
+> Updated 2026-07-03 with three new items: Anthropic in talks with Samsung to manufacture a custom AI chip
+> (2nm process, Clive Chan hire from OpenAI chip team); Bloomberg Opinion "kill switch" commentary by Parmy
+> Olson (US government export-control risk remains structural post-Fable-5 restoration); Blackstone BXPE record
+> monthly gain on Anthropic investment (4.3% net return in May 2026).
 
 | Canonical Title | Canonical URL | Source | Category | Date | Stars | Fully covered in | Last seen | Status / notes |
 |---|---|---|---|---|---|---|---|---|
@@ -129,3 +133,6 @@ never fork across days.
 | OpenAI Releases GeneBench-Pro: AI Agents Fail 70%+ of Real Biology Tasks | https://openai.com/index/introducing-genebench-pro/ | OpenAI | A | 2026-07-01 | ⭐⭐⭐ | sessions-2026-07-02.md | 2026-07-02 | New full entry 07-02; 129 biology benchmark problems; GPT-5.6 Sol 28.7% vs Claude Opus 4.8 16.0%; even leader fails ~70% of real-biology tasks |
 | Codex CLI v0.142.5: Security Patch Closes Trace-Log Request Payload Exposure | https://github.com/openai/codex/releases | OpenAI / Codex | A/F | 2026-07-01 | ⭐⭐⭐ | sessions-2026-07-02.md | 2026-07-02 | New full entry 07-02; full WebSocket request payloads were leaking to trace logs; FCA/PRA audit risk for banks evaluating Codex CLI; verify v0.142.5+ |
 | ChatGPT Business: Centralised Plugin Management in Workspace Settings | https://help.openai.com/en/articles/11391654-chatgpt-business-release-notes | OpenAI | F | 2026-07-01 | ⭐⭐ | sessions-2026-07-02.md | 2026-07-02 | New entry 07-02; workspace admins can manage all plugins from one screen; soft date (July release-notes cycle); incremental governance feature |
+| Anthropic in Talks With Samsung to Manufacture a Custom AI Chip | https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/ | Anthropic / Samsung (TechCrunch / Bloomberg) | B | 2026-07-02 | ⭐⭐⭐⭐ | sessions-2026-07-03.md | 2026-07-03 | New full entry 07-03; 2nm Samsung process under consideration; Clive Chan (ex-OpenAI Jalapeño chip team) hired; plans still early-stage; Samsung participated in $65B Series H |
+| Anthropic and OpenAI Users Still Fear an American Kill Switch | https://www.bloomberg.com/opinion/articles/2026-07-01/anthropic-s-fable-deal-with-the-us-government-shouldn-t-be-secret | Bloomberg Opinion (Parmy Olson) | C/F | 2026-07-01 | ⭐⭐⭐ | sessions-2026-07-03.md | 2026-07-03 | New full entry 07-03; opacity of Fable 5 restoration deal is itself a risk; undisclosed terms with US government; business-continuity and FCA/PRA third-party risk implications |
+| Blackstone Fund Posts Record Monthly Gain on Anthropic AI Investment | https://www.bloomberg.com/news/articles/2026-07-02/anthropic-drives-strongest-month-for-blackstone-fund-for-wealthy | Bloomberg | B | 2026-07-02 | ⭐⭐ | sessions-2026-07-03.md | 2026-07-03 | New entry 07-03; BXPE 4.3% net return in May; 11.4% YTD; investor momentum story only |
