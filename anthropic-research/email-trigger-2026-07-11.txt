@@ -1,0 +1,1 @@
+trigger email for sessions-2026-07-11.md
