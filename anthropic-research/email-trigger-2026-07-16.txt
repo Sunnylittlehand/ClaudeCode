@@ -1,0 +1,1 @@
+trigger: email report for 2026-07-16
