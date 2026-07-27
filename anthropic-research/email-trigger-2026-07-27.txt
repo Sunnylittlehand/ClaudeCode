@@ -1,0 +1,5 @@
+Email trigger for 2026-07-27 AI intelligence report.
+Report: anthropic-research/sessions-2026-07-27.md
+Status: COMPLETE
+New items: 3 (Kimi K3 open weights, OpenAI 17-day stability crisis, Karpathy rumour debunked)
+Generated: 2026-07-27
