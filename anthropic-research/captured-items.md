@@ -14,13 +14,18 @@ never fork across days.
 > Baseline seeded 2026-06-21 from the current active set (the 2026-06-21 full items plus
 > the carry-forward recap of items covered in full on 2026-06-20). Updated 2026-06-22 with
 > six new items from today's session. Updated 2026-06-23 with four new/materially-updated items.
-> Updated 2026-08-05 with three new items: Claude Code Week 37 / v2.1.222 (VSCode Focus view,
-> sandbox credential masking mode:mask, Bash tool zsh permission-bypass fix, worktree git isolation
-> fix, cache-efficient auto-mode permission checks, Vertex AI tool search re-enabled); OpenAI
-> Codex Auto-Review upgraded to GPT-5.6 Luna (~10× cost reduction, $0.013/PR from $0.12); OpenAI
-> GPT-5.4 and GPT-5.4 mini deprecated from Codex on August 31 (API-key users unaffected; replace
-> with GPT-5.6 Terra / Luna). Material update: Claude Opus 4.1 API retired today (August 5) —
-> requests now return errors; migrate to claude-opus-5 or claude-opus-4-8.
+> Updated 2026-08-05 with five new items: Anthropic appoints Tino Cuéllar (former CA Supreme Court
+> Justice, Carnegie Endowment president) as first Chief Global Affairs Officer, reporting to Daniela
+> Amodei — heads policy, government relations, international engagement; OpenAI Codex product lead
+> Thibault Sottiaux warns current Codex will "feel primitive in 2–3 months" + Ona acquisition
+> (formerly Gitpod) enables persistent cloud-native agent execution as next Codex phase; Claude Code
+> Week 37 / v2.1.222 (VSCode Focus view, sandbox credential masking mode:mask, Bash tool zsh
+> permission-bypass fix, worktree git isolation fix, cache-efficient auto-mode permission checks,
+> Vertex AI tool search re-enabled); OpenAI Codex Auto-Review upgraded to GPT-5.6 Luna (~10× cost
+> reduction, $0.013/PR from $0.12); OpenAI GPT-5.4 and GPT-5.4 mini deprecated from Codex on
+> August 31 (API-key users unaffected; replace with GPT-5.6 Terra / Luna). Material update: Claude
+> Opus 4.1 API retired today (August 5) — requests now return errors; migrate to claude-opus-5 or
+> claude-opus-4-8.
 > Updated 2026-08-04 with three material updates: OpenAI Astra Capitol Hill Demo (Altman
 > demoed Astra to Senators Warnock/Moreno/Warner Aug 3; Astra first model under EO 14409
 > federal review); White House EO 14409 AI Framework completed but classified (no public
@@ -336,3 +341,5 @@ never fork across days.
 | Claude Code Week 37 (v2.1.222): VSCode Focus View, Sandbox Credential Masking, and zsh Security Fix | https://code.claude.com/docs/en/changelog | Anthropic | A/F | 2026-08-03 to 2026-08-04 | ⭐⭐⭐ | sessions-2026-08-05.md | 2026-08-05 | New full entry 08-05; VSCode Focus view (Ctrl+Alt+F) collapses tool-call detail to per-turn expandable summary; sandbox credential masking (mode: "mask" for Linux/WSL, fallback deny on macOS); Bash tool zsh permission-check bypass fix (regex conditional hidden command execution); worktree isolated subagent destructive-git fix; cache-efficient auto-mode permission checks for parallel tool calls; Vertex AI tool search re-enabled for Claude 4.5+; /usage-credits on Team/Enterprise; HTTPS proxy startup fix |
 | OpenAI Codex Auto-Review Upgraded to GPT-5.6 Luna — ~10× Cost Reduction | https://developers.openai.com/codex/changelog | OpenAI / Codex | A/F | 2026-08-04 | ⭐⭐⭐ | sessions-2026-08-05.md | 2026-08-05 | New full entry 08-05; Auto-review upgraded from GPT-5.4 to GPT-5.6 Luna in ChatGPT app and Codex CLI; combined with Luna's July 30 -80% price cut: Auto-review ~10× cheaper (~$0.013/PR vs ~$0.12/PR); makes always-on automated code review economically viable at enterprise scale; Claude Code has no automatic equivalent (requires human invocation of /code-review) |
 | OpenAI GPT-5.4 and GPT-5.4 Mini Deprecated from Codex on August 31 | https://developers.openai.com/codex/changelog | OpenAI / Codex | A/F | 2026-08-04 (notice) · 2026-08-31 (effective) | ⭐⭐ | sessions-2026-08-05.md | 2026-08-05 | New entry 08-05; ChatGPT-authenticated Codex sessions only (API-key sessions unaffected); replace gpt-5.4 → gpt-5.6-terra, gpt-5.4-mini → gpt-5.6-luna; 27-day notice; check workspace defaults/saved model settings/custom agents/scheduled tasks |
+| Anthropic Appoints Tino Cuéllar as First Chief Global Affairs Officer | https://www.anthropic.com/news/tino-cuellar | Anthropic | B/C/F | 2026-08-04 | ⭐⭐⭐⭐ | sessions-2026-08-05.md | 2026-08-05 | New full entry 08-05; Mariano-Florentino ("Tino") Cuéllar — former Justice of the California Supreme Court (technology/privacy/international law opinions), former President Carnegie Endowment for International Peace (scholars in 20 countries); was Anthropic LTBT member since January 2026, steps down from Trust to join C-suite; first-ever CGAO role; reports to President Daniela Amodei; leads policy, strategic international engagement, government relations; timed amid Trump administration tensions and approaching IPO (public S-1 expected Aug 26–Sep 9); FCA/PRA-relevant: named C-suite for regulatory posture at a major AI vendor |
+| OpenAI Codex "Will Feel Primitive in 2–3 Months" — Ona Acquisition Signals Cloud-Native Agent Architecture | https://thenewstack.io/openai-codex-cloud-evolution/ | OpenAI / Codex | A/D/F | 2026-08-04 | ⭐⭐⭐ | sessions-2026-08-05.md | 2026-08-05 | New full entry 08-05; Thibault Sottiaux (OpenAI Head of Core Products) posted Aug 4: current Codex "will seem primitive in 2–3 months" and "next generation of models need more than your laptop" — anticipating shift to cloud-native persistent agent execution; tied to OpenAI's June 2026 acquisition of Ona (formerly Gitpod) for persistent Codex cloud agents inside enterprise perimeters; direct competitive threat to Claude Code's Cowork remote sessions and Apps Gateway architecture; rollout planning implication: Claude Code enterprise embedding should accelerate before Codex closes the gap |
