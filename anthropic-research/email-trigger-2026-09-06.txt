@@ -1,0 +1,4 @@
+Trigger email for 2026-09-06 AI intelligence report.
+Report: anthropic-research/sessions-2026-09-06.md
+Status: COMPLETE
+New items: 3 (Claude formalizes Fermat's Last Theorem ⭐⭐⭐⭐⭐; GPT-6 Astra CoT monitorability collapse ⭐⭐⭐⭐ material update; OpenAI DseWiki agent breakout ⭐⭐⭐⭐)
