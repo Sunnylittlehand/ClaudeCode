@@ -1,0 +1,65 @@
+name: Update Ledger Oct 1 (one-time)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Oct 1 updates
+        env:
+          HEADER_B64: "PiBVcGRhdGVkIDIwMjYtMTAtMDEgd2l0aCB0aHJlZSBuZXcgaXRlbXM6IE9wZW5BSSBEaXNydXB0aW5nIGEgQ29vcmRpbmF0ZWQgTW9kZWwtRGlzdGlsbGF0aW9uIENhbXBhaWduIOKAlCBNb29uc2hvdCBBSSBOYW1lZCAoTkVXIFNlcCAzMDsgT3BlbkFJIGZpcnN0IHB1YmxpYyBhdHRyaWJ1dGlvbiBvZiBtb2RlbCBJUCB0aGVmdCwgbmFtZXMgTW9vbnNob3QgQUkvS2ltaSBLMyBhcyByZXNwb25zaWJsZSBmb3Igc3lzdGVtYXRpYyBDb1QgZXh0cmFjdGlvbiBmcm9tIEdQVC02IGZhbWlseTsgcGVhayAxNiwwMDAgcmVxdWVzdHMvZGF5LCAxNSwwMDArIGFjY291bnQgY2x1c3RlcjsgYXR0YWNrIHZpYSBpbnRlcmFjdGlvbiBtYW5pcHVsYXRpb24gbm90IGNyeXB0b2dyYXBoaWMgYnJlYWs7IGNvbnRhaW5lZCBKdWx5IDI4OyBhbnRpLWRpc3RpbGxhdGlvbiB0ZWNobmljYWwgY29udHJvbHMgZGVwbG95ZWQ7IGluZHVzdHJ5IGNvb3JkaW5hdGlvbjsgb3BlbmFpLmNvbS9pbmRleC9kaXNydXB0aW5nLWEtY29vcmRpbmF0ZWQtbW9kZWwtZGlzdGlsbGF0aW9uLWNhbXBhaWduLyk7IENsYXVkZSBmb3IgR292ZXJubWVudCDigJQgR2VuZXJhbGx5IEF2YWlsYWJsZSAoTUFURVJJQUwgVVBEQVRFIHRvIHNlc3Npb25zLTIwMjYtMDctMDcubWQ7IFNlcCAzMDsgYmV0YS10by1HQSB0cmFuc2l0aW9uOyBGZWRSQU1QIEhpZ2ggKyBQYWxhbnRpciBib3VuZGFyeTsgQ2xhdWRlIENvZGUgKyBDb3dvcmsgKyB0YW1wZXItZXZpZGVudCBhdWRpdCBsb2dzIGFsbCBHQTsgJDYwL3NlYXQvbW9udGggdmlhIENhcmFoc29mdDsgb3BlbiB0byBmZWRlcmFsL3N0YXRlL2xvY2FsIGFnZW5jaWVzIGFuZCBnb3Zlcm5tZW50IGNvbnRyYWN0b3JzOyBzdXBwb3J0LmNsYXVkZS5jb20vZW4vYXJ0aWNsZXMvMTM3NTYwNjktcHVibGljLXNlY3Rvci1mYXFzKTsgT3BlbkFJICJUb3dhcmRzIFNhZmV0eSBDYXNlcyBmb3IgRnJvbnRpZXIgQUkgVHJhaW5pbmciIChORVcgU2VwIDI4OyBzdHJ1Y3R1cmVkIHNhZmV0eSBkb2N1bWVudGF0aW9uIHJlcXVpcmVkIGJlZm9yZSBmcm9udGllciBSTCB0cmFpbmluZzsgdGhyZWUgcGlsbGFyczogYWxpZ25tZW50IHRyYWluaW5nL2NvbnRhaW5tZW50L21vbml0b3Jpbmc7IGF2aWF0aW9uLXN0eWxlIHBvc3QtaW5jaWRlbnQgcmV2aWV3cyB3aXRoIHB1YmxpYyBkYXRhIHNoYXJpbmc7IHBvc2l0aW9ucyBhcyBpbnB1dCB0byBGcm9udGllciBBSSBTdGFuZGFyZHMgQWdlbmN5OyBvcGVuYWkuY29tL2luZGV4L3Rvd2FyZHMtc2FmZXR5LWNhc2VzLWZvci1mcm9udGllci1haS10cmFpbmluZy8pLg=="
+          ROW1_B64: "fCBPcGVuQUkgRGlzcnVwdGluZyBhIENvb3JkaW5hdGVkIE1vZGVsLURpc3RpbGxhdGlvbiBDYW1wYWlnbiDigJQgTW9vbnNob3QgQUkgTmFtZWQgfCBodHRwczovL29wZW5haS5jb20vaW5kZXgvZGlzcnVwdGluZy1hLWNvb3JkaW5hdGVkLW1vZGVsLWRpc3RpbGxhdGlvbi1jYW1wYWlnbi8gfCBPcGVuQUkgfCBDL0YgfCAyMDI2LTA5LTMwIHwg4q2Q4q2Q4q2Q4q2Q4q2QIHwgc2Vzc2lvbnMtMjAyNi0xMC0wMS5tZCB8IDIwMjYtMTAtMDEgfCBOZXcgZnVsbCBlbnRyeSAxMC0wMTsgZmlyc3QgZnJvbnRpZXItbGFiIHB1YmxpYyBhdHRyaWJ1dGlvbiBvZiBtb2RlbCBJUCB0aGVmdDsgTW9vbnNob3QgQUkgKEtpbWkgSzMpIG5hbWVkOyBjb29yZGluYXRlZCBleHRyYWN0aW9uIG9mIEdQVC02IHByb3RlY3RlZCBDb1QgcmVhc29uaW5nOyBwZWFrIDE2LDAwMCByZXF1ZXN0cy9kYXkgZnJvbSA0LDAwMCsgdXNlcnM7IDE1LDAwMCsgYWNjb3VudCBjbHVzdGVyOyBhdHRhY2sgdmlhIGludGVyYWN0aW9uIG1hbmlwdWxhdGlvbiBub3QgY3J5cHRvZ3JhcGhpYyBicmVhazsgY29udGFpbmVkIEp1bHkgMjg7IGFudGktZGlzdGlsbGF0aW9uIHRlY2huaWNhbCBjb250cm9scyBkZXBsb3llZDsgaW5kdXN0cnkgY29vcmRpbmF0aW9uOyBkaXJlY3RseSBpbXBsaWNhdGVzIHByZXZpb3VzbHkgZmxhZ2dlZCBLaW1pIEszIGNvbXBsaWFuY2UgcmlzayB8"
+          ROW2_B64: "fCBDbGF1ZGUgZm9yIEdvdmVybm1lbnQg4oCUIEdlbmVyYWxseSBBdmFpbGFibGUgfCBodHRwczovL3N1cHBvcnQuY2xhdWRlLmNvbS9lbi9hcnRpY2xlcy8xMzc1NjA2OS1wdWJsaWMtc2VjdG9yLWZhcXMgfCBBbnRocm9waWMgfCBBL0MvRiB8IDIwMjYtMDktMzAgfCDirZDirZDirZDirZAgfCBzZXNzaW9ucy0yMDI2LTEwLTAxLm1kIHwgMjAyNi0xMC0wMSB8IE1hdGVyaWFsIHVwZGF0ZSAxMC0wMSAoYmV0YSBKdWx5IDcg4oaSIEdBIFNlcCAzMCk7IEZlZFJBTVAgSGlnaCArIFBhbGFudGlyIGJvdW5kYXJ5OyBDbGF1ZGUgQ29kZSArIENvd29yayArIHRhbXBlci1ldmlkZW50IGF1ZGl0IGxvZ3MgYWxsIEdBOyAkNjAvc2VhdC9tb250aDsgZmVkZXJhbC9zdGF0ZS9sb2NhbCBhZ2VuY2llcyArIGNvbnRyYWN0b3JzOyByZWZlcmVuY2UgYXJjaGl0ZWN0dXJlIGZvciBVSyByZWd1bGF0ZWQtaW5kdXN0cnkgZGVwbG95bWVudCB8"
+          ROW3_B64: "fCBPcGVuQUkg4oCUIFRvd2FyZHMgU2FmZXR5IENhc2VzIGZvciBGcm9udGllciBBSSBUcmFpbmluZyB8IGh0dHBzOi8vb3BlbmFpLmNvbS9pbmRleC90b3dhcmRzLXNhZmV0eS1jYXNlcy1mb3ItZnJvbnRpZXItYWktdHJhaW5pbmcvIHwgT3BlbkFJIHwgQy9GIHwgMjAyNi0wOS0yOCB8IOKtkOKtkOKtkCB8IHNlc3Npb25zLTIwMjYtMTAtMDEubWQgfCAyMDI2LTEwLTAxIHwgTmV3IGZ1bGwgZW50cnkgMTAtMDE7IHN0cnVjdHVyZWQgcHJlLXRyYWluaW5nIHNhZmV0eSBkb2N1bWVudGF0aW9uIGZyYW1ld29yazsgdGhyZWUgcGlsbGFyczogYWxpZ25tZW50IHRyYWluaW5nL2NvbnRhaW5tZW50L21vbml0b3Jpbmc7IGF2aWF0aW9uLXN0eWxlIHBvc3QtaW5jaWRlbnQgcmV2aWV3czsgcG9zaXRpb25lZCBhcyBpbnB1dCB0byBGcm9udGllciBBSSBTdGFuZGFyZHMgQWdlbmN5OyB0ZW1wbGF0ZSBmb3IgZnV0dXJlIGVudGVycHJpc2UgdmVuZG9yIGR1ZS1kaWxpZ2VuY2UgcmVxdWVzdHMgfA=="
+        run: |
+          python3 << 'PYEOF'
+          import base64, os
+
+          header = base64.b64decode(os.environ['HEADER_B64']).decode('utf-8')
+          row1   = base64.b64decode(os.environ['ROW1_B64']).decode('utf-8')
+          row2   = base64.b64decode(os.environ['ROW2_B64']).decode('utf-8')
+          row3   = base64.b64decode(os.environ['ROW3_B64']).decode('utf-8')
+
+          with open('anthropic-research/captured-items.md', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          anchor1 = '> Updated 2026-09-30'
+          if anchor1 in content and header not in content:
+              content = content.replace(anchor1, header + '\n' + anchor1, 1)
+              print('Inserted Oct 1 header entry')
+          else:
+              print('Header already present or anchor not found — skipping')
+
+          anchor2 = '| OpenAI DevDay 2026 — Dots'
+          new_rows = row1 + '\n' + row2 + '\n' + row3 + '\n'
+          if anchor2 in content and row1 not in content:
+              content = content.replace(anchor2, new_rows + anchor2, 1)
+              print('Inserted 3 new table rows')
+          else:
+              print('Rows already present or anchor not found — skipping')
+
+          with open('anthropic-research/captured-items.md', 'w', encoding='utf-8') as f:
+              f.write(content)
+          print('Done writing file')
+          PYEOF
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add anthropic-research/captured-items.md
+          git diff --staged --stat
+          if git diff --staged --quiet; then
+            echo "No changes to commit — file already up to date"
+          else
+            git commit -m "Update captured-items.md ledger — add 3 new Oct 1 rows
+
+New rows: OpenAI Moonshot AI distillation disclosure, Claude for Government GA,
+OpenAI safety cases paper. Updated 2026-10-01 annotation added.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SEdtCgVHtp3AXJsjGKM7ot"
+            git push
+          fi
