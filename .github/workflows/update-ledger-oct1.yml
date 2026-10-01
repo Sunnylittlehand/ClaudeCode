@@ -1,6 +1,9 @@
 name: Update Ledger Oct 1 (one-time)
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/update-ledger-oct1.yml']
 permissions:
   contents: write
 jobs:
