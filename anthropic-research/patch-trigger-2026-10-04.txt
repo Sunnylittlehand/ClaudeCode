@@ -1,0 +1,2 @@
+Trigger file — pushed 2026-10-04 to fire patch-captured-items.yml workflow.
+This file will be removed by the workflow after the patch is applied.
