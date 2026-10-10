@@ -1,0 +1,5 @@
+email-trigger for 2026-10-10
+report: anthropic-research/sessions-2026-10-10.md
+status: COMPLETE
+items: 4 new full entries, 20 carry-forwards
+generated: 2026-10-10
