@@ -1,0 +1,4 @@
+Trigger email for 2026-10-12 AI intelligence report.
+Report: anthropic-research/sessions-2026-10-12.md
+Status: COMPLETE
+New items: 4 (AI catastrophe rehearsal, Karpathy capability funnel, Claude Code v2.1.293-295, Codex CLI v0.161-0.162)
